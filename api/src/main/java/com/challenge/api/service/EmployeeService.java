@@ -18,9 +18,7 @@ public class EmployeeService {
     private final Map<UUID, Employee> store = new ConcurrentHashMap<>();
 
     public List<Employee> getAllEmployees() {
-        return store.values().stream()
-                .map(EmployeeImpl::copyOf)
-                .collect(Collectors.toCollection(ArrayList::new));
+        return store.values().stream().map(EmployeeImpl::copyOf).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public Optional<Employee> findByUuid(UUID uuid) {

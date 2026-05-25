@@ -22,7 +22,10 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/**").hasRole("USER").anyRequest().permitAll())
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/**")
+                        .hasRole("USER")
+                        .anyRequest()
+                        .permitAll())
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }

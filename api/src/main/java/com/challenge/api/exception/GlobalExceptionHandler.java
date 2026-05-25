@@ -31,8 +31,7 @@ public class GlobalExceptionHandler {
             MethodArgumentNotValidException ex, HttpServletRequest request) {
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors().stream()
                 .map(fe -> new FieldError(
-                        fe.getField(),
-                        fe.getDefaultMessage() != null ? fe.getDefaultMessage() : "Invalid value"))
+                        fe.getField(), fe.getDefaultMessage() != null ? fe.getDefaultMessage() : "Invalid value"))
                 .toList();
         return buildResponse(HttpStatus.BAD_REQUEST, "Validation failed", request.getRequestURI(), fieldErrors);
     }
@@ -58,8 +57,8 @@ public class GlobalExceptionHandler {
 
     private ResponseEntity<ErrorResponse> buildResponse(
             HttpStatus status, String message, String path, List<FieldError> fieldErrors) {
-        ErrorResponse response = new ErrorResponse(
-                Instant.now(), status.value(), status.getReasonPhrase(), message, path, fieldErrors);
+        ErrorResponse response =
+                new ErrorResponse(Instant.now(), status.value(), status.getReasonPhrase(), message, path, fieldErrors);
         return ResponseEntity.status(status).body(response);
     }
 }

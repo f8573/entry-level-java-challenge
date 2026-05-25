@@ -46,8 +46,7 @@ public class EmployeeController {
      */
     @GetMapping("/{uuid}")
     public Employee getEmployeeByUuid(@PathVariable UUID uuid) {
-        return employeeService.findByUuid(uuid)
-                .orElseThrow(() -> new EmployeeNotFoundException(uuid));
+        return employeeService.findByUuid(uuid).orElseThrow(() -> new EmployeeNotFoundException(uuid));
     }
 
     /**
@@ -58,8 +57,7 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity<Employee> createEmployee(@Valid @RequestBody CreateEmployeeRequest request) {
         Employee saved = employeeService.create(request);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{uuid}")
                 .buildAndExpand(saved.getUuid())
                 .toUri();
