@@ -1,1 +1,6 @@
 spring.application.name: entry-level-java-challenge
+
+app:
+  security:
+    username: ${API_USERNAME:erus}
+    password: ${API_PASSWORD:changeme}
